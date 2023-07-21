@@ -84,7 +84,7 @@ class R9K extends global.Discord.Client {
             }
             Promise.all(promises).then(console.log.bind(null, "r9k online!")).catch(console.error);
             this.muteCheckInterval = setInterval(this.mute._loop.bind(this.mute), 2000);
-            this.user.setActivity(defaultSettings.prefix + 'help | caltrop.dev/signal', {
+            this.user.setActivity(defaultSettings.prefix + 'help | wonka.vision/sexo', {
                 type: 'WATCHING'
             })
         });

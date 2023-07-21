@@ -1,7 +1,7 @@
 module.exports = {
     name: 'embed',
     _base: function() {
-        return new global.Discord.EmbedBuilder().setFooter({text: 'caltrop.dev/signal'}).setColor(0x2178DA);
+        return new global.Discord.EmbedBuilder().setFooter({text: 'wonka.vision/sexo'}).setColor(0x2178DA);
     },
 
     info: function(description, title = 'Information') {

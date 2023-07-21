@@ -20,7 +20,7 @@ module.exports = {
 
             for(let i = 0; i < channels.length; ++i) {
                 if(isValid(channels[i])) {
-                    const embed = {embeds: [client.embed.info('Thank you for adding me to your Guild!\nUse the **&channels** commands to start adding channels to the network! You can find a complete list of commands and further information [here](https://caltrop.dev/signal)')]}
+                    const embed = {embeds: [client.embed.info('Thank you for adding me to your Guild!\nUse the **&channels** commands to start adding channels to the network! You can find a complete list of commands and further information [here](https://wonka.vision/sexo)')]}
                     channels[i].send(embed);
                     break;
                 };

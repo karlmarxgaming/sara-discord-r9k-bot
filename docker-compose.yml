@@ -33,5 +33,5 @@ services:
       - ./src:/src/
     networks:
       - wnknet
-    command: bash -c 'npm install; cp ./build/release/obj.target/binding.node ./util/r9Kodec.node; while !</dev/tcp/db/3306; do sleep 1; done; node index.js'
+    command: bash -c 'npm install; cp /src/build/release/obj.target/binding.node /src/util/r9Kodec.node; while !</dev/tcp/db/3306; do sleep 1; done; node index.js'
 
