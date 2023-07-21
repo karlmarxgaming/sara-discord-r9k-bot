@@ -8,9 +8,8 @@ module.exports = {
         const guild = msg.channel.guild;
 
         if(!args.length) {
-            output.send({ embeds: [ client.embed.info(client.misc.endListWithAnd(Array.from(client.guildInfo[msg.channel.guild.id].channels).map(c => '<#' + c + '>')) || 'No channels added yet!\n\nUse **' + client.guildInfo[msg.channel.guild.id].settings.prefix + 'channel add <channel>** to start adding channels to the list!', 'List of Channels')]});
+            output.send({ embeds: [ client.embed.info(client.misc.endListWithAnd(Array.from(client.guildInfo[msg.channel.guild.id].channels).map(c => '<#' + c + '>')) || 'No roles added yet!\n\nUse **' + client.guildInfo[msg.channel.guild.id].settings.prefix + 'roles add <role>** to start adding channels to the list!', 'List of role')]});
         } else if(args.length >= 2) {
-            if(!msg.member.roles.cache.has('1114010271917297694')) return output.send({embeds: [client.embed.invalid('You are missing the **manage guild** permission!\n\nConsider asking a Moderator for help.', 'Missing Permissions')]});
             const str = args.join(' ').substring((args[0].length)).trim();
             var channel = null;
             switch(args[0].toLowerCase()) {

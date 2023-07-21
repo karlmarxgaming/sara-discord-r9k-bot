@@ -77,7 +77,7 @@ module.exports = {
                     if(msg.member.roles.cache.has(role)) hasPerms = true
                 });
 
-                if (msg.author.id = msg.guild.ownerId ) hasPerms = true
+                if(msg.author.id = msg.guild.ownerId) hasPerms = true
 
                 if(cmd.perms && !hasPerms){
                     return output.send({embeds: [client.embed.invalid('You need permissions to use this command!', 'Invalid Permissions')]})
