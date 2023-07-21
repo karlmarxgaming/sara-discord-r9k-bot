@@ -13,7 +13,7 @@ module.exports = {
 
                     if(comp.length > 2000) return client.error.handler(
                         null, 
-                        msg.member.id,
+                        msg.author.id,
                         msg.channel.guild.id,
                         Date.now(),
                         new TypeError('Compressed data exceeds 2000 char limit!')
@@ -34,7 +34,7 @@ module.exports = {
                 if(!valid) {
                     msg.delete();
                     if(client.guildInfo[msg.channel.guild.id].settings.muteOnViolation && !msg.author.bot) {
-                        client.mute.apply(msg.member.id, msg.channel.guild.id);
+                        client.mute.apply(msg.author.id, msg.channel.guild.id);
                     }
                 } else evaluateCommand();
             } catch(e) {
@@ -67,7 +67,7 @@ module.exports = {
                 if(!cmd) {
                     const mostSimilar = client.commands.map((c) => [c, Math.max(client.misc.similarity(cmdName, c.name), ...c.aliases.map(a => client.misc.similarity(cmdName, a)))]).sort((a,b) => b[1] - a[1])[0];
                     if(!mostSimilar || mostSimilar[1] < 0.6) return output.send({embeds: [client.embed.invalid('Couldn\'t find that command.\n\nUse **' + client.guildInfo[msg.channel.guild.id].settings.prefix + 'help** to see a list of all commands!', 'Unknown Command')]});
-                    if(await client.misc.confirm(output, msg.member.id, `Did you mean **${prefix}${mostSimilar[0].name}**?`, 'Unknown Command')) {
+                    if(await client.misc.confirm(output, msg.author.id, `Did you mean **${prefix}${mostSimilar[0].name}**?`, 'Unknown Command')) {
                         cmd = mostSimilar[0];
                     } else return;
                 };
@@ -77,23 +77,24 @@ module.exports = {
                     if(msg.member.roles.cache.has(role)) hasPerms = true
                 });
 
-                if(msg.author.id = msg.guild.ownerId) hasPerms = true
-
+                if(msg.author.id == msg.guild.ownerId) {
+                    hasPerms = true}
+                console.log(`user: ${msg.member.id} hasperms: ${hasPerms}`);
                 if(cmd.perms && !hasPerms){
                     return output.send({embeds: [client.embed.invalid('You need permissions to use this command!', 'Invalid Permissions')]})
                 }       
                   
                 if(cmd.rate) {
-                    const timestamp = cmd.cooldown.get(msg.member.id);
+                    const timestamp = cmd.cooldown.get(msg.author.id);
                     if(timestamp) {
                         const remaining = Date.now() - timestamp,
                             duration = cmd.rate * 1000;
-                        if(remaining > duration) cmd.cooldown.delete(msg.member.id);
+                        if(remaining > duration) cmd.cooldown.delete(msg.author.id);
                         else return output.send({embeds: [client.embed.invalid(`Please wait another **${(Math.abs(remaining - duration) / 1000).toFixed(1)}s** before running this command again!`, 'Command Cooldown')]});
-                    } else cmd.cooldown.set(msg.member.id, Date.now());
+                    } else cmd.cooldown.set(msg.author.id, Date.now());
                 }
 
-                const handler = client.error.handler.bind(null, output, msg.member.id, msg.channel.guild.id, Date.now());
+                const handler = client.error.handler.bind(null, output, msg.author.id, msg.channel.guild.id, Date.now());
                 
                 try {
                     cmd.run(handler, msg, args, output);

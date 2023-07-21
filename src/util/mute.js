@@ -26,7 +26,7 @@ module.exports = {
                 const permDeletPromise = [];
                 for(let i = 0; i < channels.length; ++i) {
                     const channel = guild.channels.cache.get(channels[i]),
-                        perm = channel.permissionOverwrites.get(member.id);
+                        perm = channel.permissionOverwrites.cache.get(member.id);
                     if(perm && !perm.allow.bitfield && !perm.deny.bitfield) permDeletPromise.push(perm.delete());
                 };
                 Promise.all(permDeletPromise).then(resolve).catch(reject);
