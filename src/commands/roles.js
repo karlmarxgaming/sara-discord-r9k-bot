@@ -1,7 +1,7 @@
 module.exports = {
     name: 'roles',
     aliases: ['role', 'ro'],
-    args: '[add|remove] [channel]',
+    args: '[add|remove] [role]',
     perms: true,
 
     run: async function(handler, msg, args, output) {
@@ -17,31 +17,31 @@ module.exports = {
                 case 'a':
                     role = await client.get.role(str, guild.id);
                     if(!role) {
-                        return output.send({embeds: [client.embed.invalid(`Couldn't find specified channel!`, 'Invalid Channel', this, msg.channel.guild.id)]});
+                        return output.send({embeds: [client.embed.invalid(`Couldn't find specified role!`, 'Invalid role', this, msg.channel.guild.id)]});
                     }
                     if(client.guildInfo[guild.id].roles.has(role.id)) {
-                        return output.send({embeds: [client.embed.invalid(`The ${role} channel has already been added to the network!`, 'Invalid Channel', this, msg.channel.guild.id)]});
+                        return output.send({embeds: [client.embed.invalid(`The ${role} role has already been added to the wonknetwork!`, 'Invalid role', this, msg.channel.guild.id)]});
                     }
                     client.guildInfo[guild.id].roles.add(role.id);
 
                     client.sql.addRole(guild.id, role.id).then(() => {
-                        output.send({embeds: [client.embed.success(`The ${role} channel has been added to the network!`, 'Success!')]});
+                        output.send({embeds: [client.embed.success(`The ${role} role has been added to the wonkanetwork!`, 'Success!')]});
                     }).catch(console.error);
                     break;
                 case 'remove':
                 case 'r':
                     role = await client.get.role(str, guild.id);
                     if(!role) {
-                        return output.send({embeds: [client.embed.invalid(`Couldn't find specified channel!`, 'Invalid Channel', this, msg.channel.guild.id)]});
+                        return output.send({embeds: [client.embed.invalid(`Couldn't find specified role!`, 'Invalid role', this, msg.channel.guild.id)]});
                     }
                     if(!client.guildInfo[guild.id].roles.has(role.id)) {
-                        return output.send({embeds: [client.embed.invalid(`The ${channel} channel is not part of the network yet!`, 'Invalid Channel', this, msg.channel.guild.id)]});
+                        return output.send({embeds: [client.embed.invalid(`The ${channel} channel is not part of the network yet!`, 'Invalid role', this, msg.channel.guild.id)]});
                     }
                     //if(!(await client.misc.confirm(output, msg.member.id, `Are you sure you want to remove ${channel} from the network?`))) return;
                     client.guildInfo[guild.id].roles.delete(channel.id);
                     
                     client.sql.deleteRole(guild.id, role.id).then(() => {
-                        output.send({embeds: [client.embed.success(`The ${channel} channel has been removed from the network!`, 'Success!')]});
+                        output.send({embeds: [client.embed.success(`The ${channel} role has been removed from the role!`, 'Success!')]});
                     }).catch(console.error);
                     break;
                 default :
