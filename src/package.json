@@ -1,0 +1,22 @@
+{
+  "name": "r9k",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/collection": "^1.5.1",
+    "@discordjs/form-data": "^3.0.1",
+    "discord.js": "^14.11.0",
+    "leven": "^4.0.0",
+    "lzutf8": "^0.6.3",
+    "match-sorter": "^6.3.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.5.2"
+  }
+}
