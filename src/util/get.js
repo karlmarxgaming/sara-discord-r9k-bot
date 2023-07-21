@@ -48,5 +48,15 @@ module.exports = {
             }
             r(member);
         });
+    },
+    role(str, guildId) {
+        return new Promise(async r => {
+            if(!str || typeof str != 'string') r(undefined);
+            const mention = str.match(/<@&!?(\d+)>/),
+                guild = client.guilds.cache.get(guildId),
+                role = await guild.roles.cache.find(c => c == mention[1])
+            if (mention && !role) role = undefined
+            r(role);
+        });
     }
 }

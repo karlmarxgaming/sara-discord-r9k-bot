@@ -2,7 +2,7 @@ module.exports = {
     name: 'channels',
     aliases: ['ch', 'channel', 'network', 'networks'],
     args: '[add|remove] [channel]',
-    perms: ['GUILD_OWNER', 'DEV'],
+    perms: true,
 
     run: async function(handler, msg, args, output) {
         const guild = msg.channel.guild;

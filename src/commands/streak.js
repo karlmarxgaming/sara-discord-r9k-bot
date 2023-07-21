@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['nonce', 'getstreak', 'viewstreak'],
     args: '[user]',
     rate: 5,
-    perms: [],
+    perms: true,
 
     run: async function(handler, msg, args, output) {
         const gid = msg.channel.guild.id;

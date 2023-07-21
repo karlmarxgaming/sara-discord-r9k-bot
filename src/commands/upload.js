@@ -9,7 +9,7 @@ module.exports = {
     aliases: ['uploadbackup'],
     args: '<attached: .r9k file>',
     rate: 45,
-    perms:['DEV', 'GUILD_OWNER'],
+    perms: true,
 
     run: function(handler, msg, args, output) {
         const attachment = msg.attachments.first();

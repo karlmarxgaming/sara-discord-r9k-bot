@@ -2,7 +2,7 @@ module.exports = {
     name: 'eval',
     aliases: ['ev'],
     args: '',
-    perms: ['DEV'],
+    perms: true,
 
 
     run: async function(handler, msg, args, output) {

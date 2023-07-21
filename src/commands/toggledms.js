@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['toggledm'],
     args: '',
     rate: 5,
-    perms: [],
+    perms: true,
 
     run: async function(handler, msg, args, output) {
         const id = msg.member.id;

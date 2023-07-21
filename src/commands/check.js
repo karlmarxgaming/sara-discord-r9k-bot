@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['availability', 'available', 'used', 'alreadyused', 'words'],
     args: '<string>',
     rate: 5,
-    perms: [],
+    perms: false,
 
     run: async function(handler, msg, args, output) {
         const content = args.join(' ');

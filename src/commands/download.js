@@ -5,7 +5,7 @@ module.exports = {
     aliases: ['dl', 'backup'],
     args: '',
     rate: 20,
-    perms: [],
+    perms: false,
 
     run: function(handler, msg, args, output) {
         client.sql.selectGuildMessageData(msg.channel.guild.id).then(([queryResults]) => {

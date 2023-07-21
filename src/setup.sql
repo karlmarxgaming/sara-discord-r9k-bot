@@ -35,6 +35,12 @@ CREATE TABLE IF NOT EXISTS `channels` (
     PRIMARY KEY (`guildId`, `channelid`)
 );
 
+CREATE TABLE IF NOT EXISTS `roles` (
+	`guildId` VARCHAR(20) NOT NULL,
+    `roleId` VARCHAR(20) NOT NULL,
+    PRIMARY KEY (`guildId`, `roleId`)
+);
+
 DROP PROCEDURE IF EXISTS selectAndUpdate;
 CREATE PROCEDURE selectAndUpdate(
 	IN messageData VARCHAR(2000) CHARACTER SET utf16 COLLATE utf16_unicode_ci, 

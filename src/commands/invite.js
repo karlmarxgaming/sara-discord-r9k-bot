@@ -2,7 +2,7 @@ module.exports = {
     name: 'invite',
     aliases: ['inv'],
     args: '',
-    perms: [],
+    perms: false,
 
     run: function(handler, msg, args, output) {
         const permissions = 268807184;

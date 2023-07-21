@@ -55,9 +55,15 @@ module.exports = Object.assign(sql, {
     addChannel(guildId, channelId) {
         return this.query('INSERT IGNORE INTO `channels` (`guildId`, `channelId`) VALUES ("'+guildId+'", "'+channelId+'");');
     },
+    addRole(guildId, roleId) {
+        return this.query('INSERT IGNORE INTO `roles` (`guildId`, `roleId`) VALUES ("'+guildId+'", "'+roleId+'");');
+    },
 
     deleteChannel(guildId, channelId) {
         return this.query('DELETE FROM `channels` WHERE `guildId` = "'+guildId+'" AND `channelId` = "'+channelId+'";');
+    },
+    deleteChannel(guildId, roleId) {
+        return this.query('DELETE FROM `roles` WHERE `guildId` = "'+guildId+'" AND `roleId` = "'+roleId+'";');
     },
 
     clearDataset(guildId) {
@@ -159,5 +165,11 @@ module.exports = Object.assign(sql, {
                 .catch(reject);
             }).catch(reject);
         })
+    },
+
+    getGuildRoles(guild) {
+        let query = `SELECT \`roleId\` FROM \`roles\` WHERE \`guildId\` = "${guild}"`;
+        query += ';';
+        return this.query(query, guild);
     }
 });

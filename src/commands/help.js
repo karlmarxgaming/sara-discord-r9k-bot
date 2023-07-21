@@ -2,7 +2,7 @@ module.exports = {
     name: 'help',
     aliases: ['commands', 'cmds', ''],
     args: '',
-    perms: [],
+    perms: false,
     
     run: function(handler, msg, args, output) {
         const embed = client.embed.info(`You can find a more detailed list of commands [here](https://wonka.vision/sexo/commands)`)

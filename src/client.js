@@ -47,20 +47,27 @@ class R9K extends global.Discord.Client {
                 this.guildInfo[g.id] = {
                     mutes: Object.create(null),
                     channels: new Set(),
+                    roles: new Set(),
                     settings: Object.assign({}, defaultSettings)
                 }
             });
 
-            const [chRows, mutes, settings, dontDM] = (await Promise.all([
+            const [chRows, mutes, settings, dontDM, roles] = (await Promise.all([
                 client.sql.select('channels'),
                 client.sql.select('mutes'),
                 client.sql.select('settings'),
-                client.sql.select('dontDM')
+                client.sql.select('dontDM'),
+                client.sql.select('roles')
+
             ])).map(r => r[0]);
 
             for(let i = 0; i < chRows.length; ++i) {
                 const entry = this.guildInfo[chRows[i].guildId];
                 if(entry) entry.channels.add(chRows[i].channelId);
+            };
+            for(let i = 0; i < roles.length; ++i) {
+                const entry = this.guildInfo[roles[i].guildId];
+                if(entry) entry.roles.add(roles[i].roleId);
             };
             for(let i = 0; i < mutes.length; ++i) {
                 const entry = this.guildInfo[mutes[i].guildId];
@@ -94,6 +101,7 @@ class R9K extends global.Discord.Client {
         this.guildInfo[id] = {
             mutes: Object.create(null),
             channels: new Set(),
+            roles: new Set(),
             settings: Object.assign({}, defaultSettings)
         };
         return Promise.all([

@@ -2,7 +2,7 @@ module.exports = {
     name: 'ping',
     aliases: ['latency', 'pong', 'lat', 'status'],
     args: '',
-    perms: [],
+    perms: false,
 
     run: function(handler, msg, args, output) {
         const embed = client.embed._base()

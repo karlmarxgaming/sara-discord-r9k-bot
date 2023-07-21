@@ -1,3 +1,4 @@
+
 module.exports = {
     name: 'messageCreate',
     run: async function (msg) {
@@ -71,11 +72,17 @@ module.exports = {
                     } else return;
                 };
 
-                const perms = client.misc.getPerms(msg.member);
-                for(let i = 0; i < cmd.perms.length; ++i) {
-                    if(!perms.includes(cmd.perms[i])) return output.send({embeds: [client.embed.invalid('You need the ' + client.misc.endListWithAnd(cmd.perms.map(p => '**' + p.toLowerCase().replace(/_/g, ' ') + '**')) + ' permissions to use this command!', 'Invalid Permissions')]});
-                } 
-    
+                let hasPerms
+                client.guildInfo[msg.channel.guild.id].roles.forEach(role => {
+                    if(msg.member.roles.cache.has(role)) hasPerms = true
+                });
+
+                if (msg.author.id = msg.guild.ownerId ) hasPerms = true
+
+                if(cmd.perms && !hasPerms){
+                    return output.send({embeds: [client.embed.invalid('You need permissions to use this command!', 'Invalid Permissions')]})
+                }       
+                  
                 if(cmd.rate) {
                     const timestamp = cmd.cooldown.get(msg.member.id);
                     if(timestamp) {
@@ -87,6 +94,7 @@ module.exports = {
                 }
 
                 const handler = client.error.handler.bind(null, output, msg.member.id, msg.channel.guild.id, Date.now());
+                
                 try {
                     cmd.run(handler, msg, args, output);
                     if(deleteOp) msg.delete();
