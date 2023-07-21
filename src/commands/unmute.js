@@ -2,7 +2,7 @@ module.exports = {
     name: 'unmute',
     aliases: ['pardon'],
     args: '<user>',
-    perms: ['MANAGE_MESSAGES'],
+    perms:['DEV', 'GUILD_OWNER'],
 
     run: async function(handler, msg, args, output) {
         if(!args.length) return output.send({embeds: [client.embed.invalid('Please provide a user to unmute!', 'Invalid arguments', this, msg.channel.guild.id)]});
